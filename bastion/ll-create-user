@@ -1,0 +1,27 @@
+#! /bin/bash
+
+if [[ $(/usr/bin/id -u) -ne 0 ]]; then
+    echo "Not running as root"
+    exit
+fi
+
+source "ll-argparse"
+
+arg_positional "[username]       [Name of the user to create]"
+parse_args
+
+if [[ $ARG_USERNAME = '' ]]; then
+  echo "No username given"
+    exit
+fi
+
+USER_EXISTS="$(grep -E "^$ARG_USERNAME:.*$" < /etc/passwd)"
+
+if [[ $USER_EXISTS != '' ]]; then
+    echo "User already exists"
+    exit
+fi
+
+adduser -c "$ARG_USERNAME" "$ARG_USERNAME"
+
+ll-set-password "$ARG_USERNAME"
