@@ -8,11 +8,12 @@ fi
 source "ll-argparse"
 
 arg_positional "[username]       [Name of the user to create]"
+arg_boolean    "[sudoer] [s] [Create the user as a sudoer]"
 parse_args
 
 if [[ $ARG_USERNAME = '' ]]; then
-  echo "No username given"
-    exit
+  print_help
+  exit
 fi
 
 USER_EXISTS="$(grep -E "^$ARG_USERNAME:.*$" < /etc/passwd)"
@@ -22,6 +23,15 @@ if [[ $USER_EXISTS != '' ]]; then
     exit
 fi
 
-adduser -c "$ARG_USERNAME" "$ARG_USERNAME"
+rm -rf "/home/${ARG_USERNAME:?}"
+rm -rf "/var/mail/${ARG_USERNAME:?}"
 
-ll-set-password "$ARG_USERNAME"
+adduser -m -c "$ARG_USERNAME" "$ARG_USERNAME"
+chage -M 90 "$ARG_USERNAME" > /dev/null 2>&1
+
+if [[ $ARG_SUDOER == 'true' ]]; then
+  ll-set-sudoer "$ARG_USERNAME"
+fi
+
+ll-reset-password "$ARG_USERNAME"
+ll-reset-verification-code "$ARG_USERNAME"
