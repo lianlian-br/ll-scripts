@@ -6,8 +6,11 @@ install-linux-base:
 
 add-ec2-sumo-source:
 	@chmod +x *
-	./sumologic/add-ec2-sumo-source.py
+	./sumologic/add_ec2_sumo_source.py
 
 add-eb-sumo-source:
 	@chmod +x *
-	./sumologic/add-eb-sumo-source.py
+	./sumologic/add_eb_sumo_source.py
+
+start-collector:
+	service collector restart

@@ -39,17 +39,14 @@ def write_user_properties(
             "fields": ",".join(map(lambda field: f'{field[0]}={field[1]}', fields.items())),
             "wrapper.java.command": "java",
             "syncSources": "/opt/SumoCollector/config/sumo_sources.json",
-            "ephemeral": ephemeral
+            "ephemeral": f'{ephemeral}'.lower()
         }
 
         file_lines = generate_user_file(variables)
-
-        print(file_lines)
         new_file.writelines("\n".join(file_lines))
 
 
 def write_sources(prefix: str, sources: dict):
     with open('/opt/SumoCollector/config/sumo_sources.json', 'w') as new_file:
         file_content = generate_sources_file(prefix, sources)
-
         new_file.write(json.dumps(file_content, indent = 4))
