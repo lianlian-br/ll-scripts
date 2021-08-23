@@ -23,5 +23,5 @@ fields = {
     "vpc": vpc.lower()
 }
 
-write_sources(f'{env.lower()}/ec2/linux/{vpc.lower()}/{alias.lower()}', sources)
-write_user_properties(f'{alias}-{env}-{vpc}', access_id, access_key, fields)
+write_sources(f'{env}/ec2/linux/{vpc}/{alias}', sources)
+write_user_properties(f'{env}-{vpc}={alias}', access_id, access_key, fields)

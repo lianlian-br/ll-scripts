@@ -15,12 +15,12 @@ sources = {
 }
 
 fields = {
-    "application": alias.lower(),
-    "environment": env.lower(),
-    "vpc": vpc.lower(),
-    "modifier": modifier.lower()
+    "application": alias,
+    "environment": env,
+    "vpc": vpc,
+    "modifier": modifier
 }
 
-write_sources(f'{env.lower()}/eb/{vpc.lower()}/{alias.lower()}', sources)
-write_user_properties(f'{alias}-{env}-{vpc}', access_id, access_key, fields)
+write_sources(f'{env}/eb/{vpc}/{alias}/{modifier}', sources)
+write_user_properties(f'{env}-{vpc}-{alias}-{modifier}', access_id, access_key, fields, ephemeral=True)
 

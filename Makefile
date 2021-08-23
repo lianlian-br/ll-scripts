@@ -13,4 +13,4 @@ add-eb-sumo-source:
 	./sumologic/add_eb_sumo_source.py
 
 start-collector:
-	service collector restart
+	service collector start
