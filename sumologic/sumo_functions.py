@@ -1,6 +1,5 @@
 #!/bin/bash python3
 
-from string import Template
 import json
 
 
@@ -36,7 +35,7 @@ def write_user_properties(
             "name": name.lower(),
             "accessid": sumo_access_id,
             "accesskey": sumo_access_key,
-            "fields": ",".join(map(lambda field: f'{field[0]}/={field[1]}', fields.items())).lower(),
+            "fields": ",".join(map(lambda field: f'{field[0]}={field[1]}', fields.items())).lower(),
             "wrapper.java.command": "java",
             "syncSources": "/opt/SumoCollector/config/sumo_sources.json",
             "ephemeral": f'{ephemeral}'.lower()
