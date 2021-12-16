@@ -2,9 +2,9 @@
 
 from sumo_functions import write_sources, write_user_properties
 
-alias = input("Enter Instance Alias: ")
-env = input("Enter AWS Env Alias: ")
-vpc = input("Enter AWS VPC Alias: ")
+alias = input("Enter Instance Alias: ").replace(" ", "-")
+env = input("Enter AWS Env Alias: ").replace(" ", "-")
+vpc = input("Enter AWS VPC Alias: ").replace(" ", "-")
 
 access_id = input("Enter Sumo Logic Access Id: ")
 access_key = input("Enter Sumo Logic Access Key: ")
@@ -24,4 +24,4 @@ fields = {
 }
 
 write_sources(f'{env}/ec2/linux/{vpc}/{alias}', sources)
-write_user_properties(f'{env}-{vpc}={alias}', access_id, access_key, fields)
+write_user_properties(f'{env}-{vpc}-{alias}', access_id, access_key, fields)

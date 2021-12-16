@@ -1,0 +1,30 @@
+#! /bin/bash
+
+if [[ $(/usr/bin/id -u) -ne 0 ]]; then
+    echo "Not running as root"
+    exit
+fi
+
+source "ll-argparse"
+
+arg_positional "[openssh]       [OpenSSH version to install]"
+parse_args
+
+if [[ $ARG_OPENSSH = '' ]]; then
+  print_help
+  exit
+fi
+
+sudo yum install gcc openssl-devel zlib-devel mlocate autoconf pam-devel -y
+
+mkdir temp
+cd temp
+
+wget https://cdn.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-${ARG_OPENSSH}.tar.gz
+tar zxvf openssh-${ARG_OPENSSH}.tar.gz
+cd openssh-${ARG_OPENSSH} && ./configure --with-pam && make && sudo make install
+
+cd ..
+rm -rf temp
+
+sudo chmod 400 /etc/ssh/ssh_host_ecdsa_key /etc/ssh/ssh_host_rsa_key /etc/ssh/ssh_host_ed25519_key

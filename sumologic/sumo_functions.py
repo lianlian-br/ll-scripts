@@ -38,7 +38,8 @@ def write_user_properties(
             "fields": ",".join(map(lambda field: f'{field[0]}={field[1]}', fields.items())).lower(),
             "wrapper.java.command": "java",
             "syncSources": "/opt/SumoCollector/config/sumo_sources.json",
-            "ephemeral": f'{ephemeral}'.lower()
+            "ephemeral": f'{ephemeral}'.lower(),
+            "skipAccessKeyRemoval": "true"
         }
 
         file_lines = generate_user_file(variables)

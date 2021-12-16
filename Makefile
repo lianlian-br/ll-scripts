@@ -5,11 +5,11 @@ install-linux-base:
 	chmod ug+r /usr/local/sbin/*
 
 add-ec2-sumo-source:
-	@chmod +x *
+	@chmod +x ./sumologic/add_ec2_sumo_source.py
 	./sumologic/add_ec2_sumo_source.py
 
 add-eb-sumo-source:
-	@chmod +x *
+	@chmod +x ./sumologic/add_eb_sumo_source.py
 	./sumologic/add_eb_sumo_source.py
 
 start-collector:
