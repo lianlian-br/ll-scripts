@@ -10,8 +10,12 @@ vpc = os.environ['VPC_ALIAS'].replace(" ", "-")
 access_id = os.environ['SUMO_ACCESS_ID']
 access_key = os.environ['SUMO_ACCESS_KEY']
 
-sources = {
+file_sources = {
     "Application": "/var/log/web.stdout.log"
+}
+
+metric_sources = {
+    "Application": 8125
 }
 
 fields = {
@@ -21,6 +25,5 @@ fields = {
     "modifier": modifier
 }
 
-write_sources(f'{env}/eb/{vpc}/{alias}/{modifier}', sources)
+write_sources(f'{env}/eb/{vpc}/{alias}/{modifier}', file_sources, metric_sources)
 write_user_properties(f'{env}-{vpc}-{alias}-{modifier}', access_id, access_key, fields, ephemeral=True)
-
