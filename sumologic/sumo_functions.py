@@ -12,6 +12,7 @@ def generate_metric_source(prefix: str, source: str, port: int) -> dict:
         "contentType": "Carbon2"
     }
 
+
 def generate_file_source(prefix: str, source: str, path_expression: str) -> dict:
     return {
         "sourceType": "LocalFile",
@@ -22,12 +23,10 @@ def generate_file_source(prefix: str, source: str, path_expression: str) -> dict
 
 
 def generate_sources_file(prefix: str, pathSources: dict = {}, metricSources: dict = {}) -> dict:
-    allSources = {}
+    allPathSources = list(map(lambda source: generate_file_source(prefix, source[0], source[1]), pathSources.items()))
+    allMetricSources = list(map(lambda source: generate_metric_source(prefix, source[0], source[1]), metricSources.items()))
 
-    allSources.update(list(map(lambda source: generate_file_source(prefix, source[0], source[1]), pathSources.items())))
-    allSources.update(list(map(lambda source: generate_metric_source(prefix, source[0], source[1]), metricSources.items())))
-
-    return { "api.version": "v1", "sources": allSources }
+    return { "api.version": "v1", "sources": allPathSources + allMetricSources }
 
 
 def generate_user_file(content: dict) -> list:

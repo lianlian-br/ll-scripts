@@ -15,7 +15,7 @@ file_sources = {
 }
 
 metric_sources = {
-    "Application": 8125
+    "Carbon2": 8125
 }
 
 fields = {
