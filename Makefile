@@ -12,5 +12,9 @@ add-eb-sumo-source:
 	@chmod +x ./sumologic/add_eb_sumo_source.py
 	./sumologic/add_eb_sumo_source.py
 
+add-container-sumo-metric-source:
+	@chmod +x ./sumologic/add_container_sumo_metric_source.py
+	./sumologic/add_container_sumo_metric_source.py
+
 start-collector:
 	service collector start
