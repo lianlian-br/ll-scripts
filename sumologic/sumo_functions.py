@@ -34,13 +34,14 @@ def generate_user_file(content: dict) -> list:
 
 
 def write_user_properties(
+        path: str,
         name: str,
         sumo_access_id: str,
         sumo_access_key: str,
         fields: dict,
         ephemeral: bool = False
 ):
-    with open('/opt/SumoCollector/config/user.properties', 'w') as new_file:
+    with open(f'{path}/user.properties', 'w') as new_file:
         variables = {
             "name": name.lower(),
             "accessid": sumo_access_id,
@@ -57,8 +58,8 @@ def write_user_properties(
         new_file.writelines("\n".join(file_lines))
 
 
-def write_sources(prefix: str, pathSources: dict = {}, metricSources: dict = {}):
-    with open('/opt/SumoCollector/config/sumo_sources.json', 'w') as new_file:
+def write_sources(path: str, prefix: str, pathSources: dict = {}, metricSources: dict = {}):
+    with open(f'{path}/sumo_sources.json', 'w') as new_file:
         file_content = generate_sources_file(prefix, pathSources, metricSources)
 
         print(json.dumps(file_content, indent=4))

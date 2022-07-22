@@ -6,7 +6,6 @@ from sumo_functions import write_sources, write_user_properties
 
 alias = os.environ['APPLICATION_NAME'].replace(" ", "-")
 env = os.environ['ENVIRONMENT'].replace(" ", "-")
-modifier = os.environ['MODIFIER'].replace(" ", "-")
 vpc = os.environ['VPC_ALIAS'].replace(" ", "-")
 service_type = os.environ['SERVICE_TYPE'].replace(" ", "-")
 access_id = os.environ['SUMO_ACCESS_ID']
@@ -19,9 +18,8 @@ metric_sources = {
 fields = {
     "application": alias,
     "environment": env,
-    "vpc": vpc,
-    "modifier": modifier
+    "vpc": vpc
 }
 
-write_sources(f'{env}/{service_type}/{vpc}/{alias}/{modifier}', metric_sources)
-write_user_properties(f'{env}-{vpc}-{alias}-{modifier}', access_id, access_key, fields, ephemeral=True)
+write_sources('/sumo', f'{env}/{service_type}/{vpc}/{alias}', metricSources=metric_sources)
+write_user_properties('/sumo', f'{env}-{service_type}-{vpc}-{alias}', access_id, access_key, fields, ephemeral=True)
