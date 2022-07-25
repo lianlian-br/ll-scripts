@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 
-from sumo_functions import write_sources, write_user_properties
 import os
+
+from sumo_functions import write_sources, write_user_properties
 
 alias = os.environ['APPLICATION_NAME'].replace(" ", "-")
 env = os.environ['ENVIRONMENT'].replace(" ", "-")
@@ -25,5 +26,5 @@ fields = {
     "modifier": modifier
 }
 
-write_sources('/opt/SumoCollector/config', f'{env}/eb/{vpc}/{alias}/{modifier}', file_sources, metric_sources)
-write_user_properties('/opt/SumoCollector/config', f'{env}-{vpc}-{alias}-{modifier}', access_id, access_key, fields, ephemeral=True)
+write_sources(f'{env}/eb/{vpc}/{alias}/{modifier}', file_sources, metric_sources)
+write_user_properties(f'{env}-{vpc}-{alias}-{modifier}', access_id, access_key, fields, ephemeral=True)

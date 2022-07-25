@@ -21,5 +21,12 @@ fields = {
     "vpc": vpc
 }
 
-write_sources('/sumo', f'{env}/{service_type}/{vpc}/{alias}', metricSources=metric_sources)
-write_user_properties('/sumo', f'{env}-{service_type}-{vpc}-{alias}', access_id, access_key, fields, ephemeral=True)
+write_sources(f'{env}/{service_type}/{vpc}/{alias}', metricSources=metric_sources)
+write_user_properties(
+    f'{env}-{service_type}-{vpc}-{alias}',
+    access_id,
+    access_key,
+    fields,
+    ephemeral=True,
+    java_wrapper="/opt/SumoCollector/jre/bin/java"
+)

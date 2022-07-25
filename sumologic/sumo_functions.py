@@ -34,12 +34,13 @@ def generate_user_file(content: dict) -> list:
 
 
 def write_user_properties(
-        path: str,
         name: str,
         sumo_access_id: str,
         sumo_access_key: str,
         fields: dict,
-        ephemeral: bool = False
+        ephemeral: bool = False,
+        java_wrapper: str = "java",
+        path: str = '/opt/SumoCollector/config'
 ):
     with open(f'{path}/user.properties', 'w') as new_file:
         variables = {
@@ -47,8 +48,8 @@ def write_user_properties(
             "accessid": sumo_access_id,
             "accesskey": sumo_access_key,
             "fields": ",".join(map(lambda field: f'{field[0]}={field[1]}', fields.items())).lower(),
-            "wrapper.java.command": "java",
-            "syncSources": "/opt/SumoCollector/config/sumo_sources.json",
+            "wrapper.java.command": java_wrapper,
+            "syncSources": f'{path}/sumo_sources.json',
             "ephemeral": f'{ephemeral}'.lower(),
             "skipAccessKeyRemoval": "true"
         }
@@ -58,7 +59,7 @@ def write_user_properties(
         new_file.writelines("\n".join(file_lines))
 
 
-def write_sources(path: str, prefix: str, pathSources: dict = {}, metricSources: dict = {}):
+def write_sources(prefix: str, pathSources: dict = {}, metricSources: dict = {}, path: str = '/opt/SumoCollector/config'):
     with open(f'{path}/sumo_sources.json', 'w') as new_file:
         file_content = generate_sources_file(prefix, pathSources, metricSources)
 
