@@ -22,7 +22,7 @@ fields = {
     "vpc": vpc
 }
 
-path = sys.argv[0] if len(sys.argv) > 0 else '/opt/SumoCollector/config'
+path = sys.argv[1] if len(sys.argv) > 1 else '/opt/SumoCollector/config'
 
 write_sources(f'{env}/{service_type}/{vpc}/{alias}', metricSources=metric_sources, path=path)
 write_user_properties(
