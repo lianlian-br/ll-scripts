@@ -366,18 +366,6 @@ common: &default_settings
     com.newrelic.instrumentation.scala-2.9.3:
       enabled: false
 
-    # This instrumentation reports the name of the user principal returned from
-    # HttpServletRequest.getUserPrincipal() when servlets and filters are invoked.
-    com.newrelic.instrumentation.servlet-user:
-      enabled: false
-
-    com.newrelic.instrumentation.spring-aop-2:
-      enabled: false
-
-    # This instrumentation reports metrics for resultset operations.
-    com.newrelic.instrumentation.jdbc-resultset:
-      enabled: false
-
     # Classes loaded by classloaders in this list will not be instrumented.
     # This is a useful optimization for runtimes which use classloaders to
     # load dynamic classes which the agent would not instrument.
@@ -385,7 +373,6 @@ common: &default_settings
       groovy.lang.GroovyClassLoader$InnerLoader,
       org.codehaus.groovy.runtime.callsite.CallSiteClassLoader,
       com.collaxa.cube.engine.deployment.BPELClassLoader,
-      org.springframework.data.convert.ClassGeneratingEntityInstantiator$ObjectInstantiatorClassGenerator,
       org.mvel2.optimizers.impl.asm.ASMAccessorOptimizer$ContextClassLoader,
       gw.internal.gosu.compiler.SingleServingGosuClassLoader,
 
