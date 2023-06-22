@@ -354,41 +354,30 @@ common: &default_settings
       org.mvel2.optimizers.impl.asm.ASMAccessorOptimizer$ContextClassLoader,
       gw.internal.gosu.compiler.SingleServingGosuClassLoader,
 
-    # https://docs.newrelic.com/docs/apm/agents/java-agent/async-instrumentation/disable-scala-netty-akka-play-2-instrumentation/
-    # Disable all Akka instrumentations
-    com.newrelic.instrumentation.akka-2.0:
-      enabled: false
-    com.newrelic.instrumentation.akka-2.1:
-      enabled: false
-    # Disabling 2.2 also disables higher versions
-    com.newrelic.instrumentation.akka-2.2:
-      enabled: false
+      # Disable all Akka instrumentations
+      com.newrelic.instrumentation.akka-2.0:
+        enabled: false
+      com.newrelic.instrumentation.akka-2.1:
+        enabled: false
+      # Disabling 2.2 also disables higher versions
+      com.newrelic.instrumentation.akka-2.2:
+        enabled: false
 
-    # Disable all Netty instrumentations
-    com.newrelic.instrumentation.netty-3.4:
-      enabled: false
-    com.newrelic.instrumentation.netty-3.8:
-      enabled: false
-    com.newrelic.instrumentation.netty-4.0.0:
-      enabled: false
-    com.newrelic.instrumentation.netty-4.0.8:
-      enabled: false
+      # Disable all Play 2 instrumentations
+      com.newrelic.instrumentation.play-2.1:
+        enabled: false
+      com.newrelic.instrumentation.play-2.2:
+        enabled: false
+      com.newrelic.instrumentation.play-2.3:
+        enabled: false
+      # New in Release 3.22, the Play 2.4 instrumentation does not respect
+      # the older play2_instrumentation configuration setting
+      com.newrelic.instrumentation.play-2.4:
+        enabled: false
 
-    # Disable all Play 2 instrumentations
-    com.newrelic.instrumentation.play-2.1:
-      enabled: false
-    com.newrelic.instrumentation.play-2.2:
-      enabled: false
-    com.newrelic.instrumentation.play-2.3:
-      enabled: false
-    # New in Release 3.22, the Play 2.4 instrumentation does not respect
-    # the older play2_instrumentation configuration setting
-    com.newrelic.instrumentation.play-2.4:
-      enabled: false
-
-    # Disable all Scala-language instrumentations
-    com.newrelic.instrumentation.scala-2.9.3:
-      enabled: false
+      # Disable all Scala-language instrumentations
+      com.newrelic.instrumentation.scala-2.9.3:
+        enabled: false
 
   # Real-time profiling using Java Flight Recorder (JFR).
   # This feature reports dimensional metrics to the ingest endpoint configured by
