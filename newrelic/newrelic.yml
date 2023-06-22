@@ -124,10 +124,10 @@ common: &default_settings
       # When true, application log metrics will be reported. The default is true.
       enabled: true
 
-      # The agent will add linking metadata to each log line in your application log files.
-      # This feature should only be used if you want to use a third party log forwarder, instead
-      # of the agent's built-in forwarding feature, to send your application log events to New Relic.
-      #local_decorating:
+    # The agent will add linking metadata to each log line in your application log files.
+    # This feature should only be used if you want to use a third party log forwarder, instead
+    # of the agent's built-in forwarding feature, to send your application log events to New Relic.
+    #local_decorating:
 
       # When true, the agent will decorate your application log files with linking metadata. The default is false.
       #enabled: false
@@ -164,11 +164,11 @@ common: &default_settings
     # When true, attributes will be sent to New Relic. The default is true.
     enabled: true
 
-    #A comma separated list of attribute keys whose values should
+    #A comma separated list of attribute keys whose values should 
     # be sent to New Relic.
     #include:
 
-    # A comma separated list of attribute keys whose values should
+    # A comma separated list of attribute keys whose values should 
     # not be sent to New Relic.
     #exclude:
 
@@ -216,7 +216,7 @@ common: &default_settings
     # Default is true.
     explain_enabled: true
 
-    # Threshold for query execution time below which query plans will
+    # Threshold for query execution time below which query plans will 
     # not be captured. Relevant only when `explain_enabled` is true.
     # Default is 0.5 seconds.
     explain_threshold: 0.5
@@ -250,7 +250,7 @@ common: &default_settings
     ignore_status_codes: 404
 
   # Transaction events are used for histograms and percentiles. Non-aggregated data is collected
-  # for each web transaction and sent to the server on harvest.
+  # for each web transaction and sent to the server on harvest. 
   transaction_events:
 
     # Set to false to disable transaction events.
@@ -317,7 +317,7 @@ common: &default_settings
   # New Relic Real User Monitoring (RUM) gives you insight into the performance real users are
   # experiencing with your website. This is accomplished by measuring the time it takes for
   # your users' browsers to download and render your web pages by injecting a small amount
-  # of JavaScript code into the header and footer of each page.
+  # of JavaScript code into the header and footer of each page. 
   browser_monitoring:
 
     # By default the agent automatically inserts API calls in compiled JSPs to
@@ -330,40 +330,17 @@ common: &default_settings
   # Class transformer can be used to disable all agent instrumentation or specific instrumentation modules.
   # All instrumentation modules can be found here: https://github.com/newrelic/newrelic-java-agent/tree/main/instrumentation
   class_transformer:
-    # https://docs.newrelic.com/docs/apm/agents/java-agent/async-instrumentation/disable-scala-netty-akka-play-2-instrumentation/
-    # Disable all Akka instrumentations
-    com.newrelic.instrumentation.akka-2.0:
-      enabled: false
-    com.newrelic.instrumentation.akka-2.1:
-      enabled: false
-    # Disabling 2.2 also disables higher versions
-    com.newrelic.instrumentation.akka-2.2:
+
+    # This instrumentation reports the name of the user principal returned from 
+    # HttpServletRequest.getUserPrincipal() when servlets and filters are invoked.
+    com.newrelic.instrumentation.servlet-user:
       enabled: false
 
-    # Disable all Netty instrumentations
-    com.newrelic.instrumentation.netty-3.4:
-      enabled: false
-    com.newrelic.instrumentation.netty-3.8:
-      enabled: false
-    com.newrelic.instrumentation.netty-4.0.0:
-      enabled: false
-    com.newrelic.instrumentation.netty-4.0.8:
+    com.newrelic.instrumentation.spring-aop-2:
       enabled: false
 
-    # Disable all Play 2 instrumentations
-    com.newrelic.instrumentation.play-2.1:
-      enabled: false
-    com.newrelic.instrumentation.play-2.2:
-      enabled: false
-    com.newrelic.instrumentation.play-2.3:
-      enabled: false
-    # New in Release 3.22, the Play 2.4 instrumentation does not respect
-    # the older play2_instrumentation configuration setting
-    com.newrelic.instrumentation.play-2.4:
-      enabled: false
-
-    # Disable all Scala-language instrumentations
-    com.newrelic.instrumentation.scala-2.9.3:
+    # This instrumentation reports metrics for resultset operations.
+    com.newrelic.instrumentation.jdbc-resultset:
       enabled: false
 
     # Classes loaded by classloaders in this list will not be instrumented.
@@ -373,6 +350,7 @@ common: &default_settings
       groovy.lang.GroovyClassLoader$InnerLoader,
       org.codehaus.groovy.runtime.callsite.CallSiteClassLoader,
       com.collaxa.cube.engine.deployment.BPELClassLoader,
+      org.springframework.data.convert.ClassGeneratingEntityInstantiator$ObjectInstantiatorClassGenerator,
       org.mvel2.optimizers.impl.asm.ASMAccessorOptimizer$ContextClassLoader,
       gw.internal.gosu.compiler.SingleServingGosuClassLoader,
 
@@ -398,8 +376,8 @@ common: &default_settings
   # Names and values may not contain colons (:) or semicolons (;).
   labels:
 
-  # An example label
-  #label_name: label_value
+    # An example label
+    #label_name: label_value
 
   # New Relic Security vulnerability detection.
   security:
