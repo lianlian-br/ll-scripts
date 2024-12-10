@@ -6,9 +6,14 @@ function addDays(date, days) {
   return result;
 }
 
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 async function main() {
-  var startDate = Date.parse("2023-05-14");
-  const endDate = Date.parse("2024-06-12");
+  var startDate = Date.parse("2024-11-05");//one day before the execution day
+  const endDate = Date.parse("2024-12-05");
+  const merchantId = 129;
 
   const accountingUrls = [];
   const balanceUrls = [];
@@ -17,12 +22,15 @@ async function main() {
     accountingUrls.push(
       `http://ll-transaction.us-east-1.elasticbeanstalk.com/merchant-reconciliation/?paymentMethod=PIX,BOLETO,CREDIT_CARD&endDateTime=${startDate
         .toISOString()
-        .slice(0, 10)} 23:59:59.999999&merchantsToRunReconciliation=103`
+        .slice(
+          0,
+          10
+        )} 23:59:59.999999&merchantsToRunReconciliation=${merchantId}`
     );
     balanceUrls.push(
       `http://ll-transaction.us-east-1.elasticbeanstalk.com/merchant-reconciliation/save-balance?date=${startDate
         .toISOString()
-        .slice(0, 10)}&merchantsToRunReconciliation=103`
+        .slice(0, 10)}&merchantsToRunReconciliation=${merchantId}`
     );
   }
 
@@ -59,9 +67,13 @@ async function main() {
       await axios.post(accountingUrl, {}, config);
       console.log(`Executando accounting -> `, accountingUrl);
 
+      await sleep(15000)
+
       const balanceUrl = balanceUrls[index];
       await axios.post(balanceUrl, {}, config);
       console.log(`Salvando balance -> `, balanceUrl);
+
+      await sleep(5000)
     } catch (error) {
       console.error("Erro ao fazer as chamadas:", error);
       return;
@@ -70,3 +82,4 @@ async function main() {
 }
 
 main();
+
