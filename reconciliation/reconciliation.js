@@ -11,9 +11,9 @@ function sleep(ms) {
 }
 
 async function main() {
-  var startDate = Date.parse("2024-11-05");//one day before the execution day
-  const endDate = Date.parse("2024-12-05");
-  const merchantId = 129;
+  var startDate = Date.parse("2024-12-10");//one day before the execution day
+  const endDate = Date.parse("2024-12-13");
+  const merchantId = 152;
 
   const accountingUrls = [];
   const balanceUrls = [];
@@ -64,14 +64,16 @@ async function main() {
       };
 
       const accountingUrl = accountingUrls[index];
-      await axios.post(accountingUrl, {}, config);
       console.log(`Executando accounting -> `, accountingUrl);
+      await axios.post(accountingUrl, {}, config);
+      console.log(`Executado accounting -> `, accountingUrl);
 
-      await sleep(15000)
+      await sleep(20000)
 
       const balanceUrl = balanceUrls[index];
-      await axios.post(balanceUrl, {}, config);
       console.log(`Salvando balance -> `, balanceUrl);
+      await axios.post(balanceUrl, {}, config);
+      console.log(`Salvado balance -> `, balanceUrl);
 
       await sleep(5000)
     } catch (error) {
