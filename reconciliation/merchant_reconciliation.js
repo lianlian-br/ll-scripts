@@ -11,9 +11,9 @@ function sleep(ms) {
 }
 
 async function main() {
-  var startDate = Date.parse("2024-12-10");//one day before the execution day
-  const endDate = Date.parse("2024-12-13");
-  const merchantId = 152;
+  var startDate = Date.parse("2024-11-11");//one day before the execution day
+  const endDate = Date.parse("2025-04-21");
+  const merchantId = 190;
 
   const accountingUrls = [];
   const balanceUrls = [];
@@ -68,7 +68,7 @@ async function main() {
       await axios.post(accountingUrl, {}, config);
       console.log(`Executado accounting -> `, accountingUrl);
 
-      await sleep(20000)
+      await sleep(5000)
 
       const balanceUrl = balanceUrls[index];
       console.log(`Salvando balance -> `, balanceUrl);
