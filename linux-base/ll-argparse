@@ -56,6 +56,7 @@
 # * parse_args
 #   - This is a required step and must be run after registering all your variables with argparse.sh.
 
+echo "Executing ll-argparse"
 
 ARGS_ARR=("$@")
 
@@ -398,3 +399,5 @@ print_help() {
     done
   fi
 }
+
+echo "Done ll-argparse"

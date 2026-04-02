@@ -1,5 +1,7 @@
 #! /bin/bash
 
+echo "Executing ll-create-user"
+
 if [[ $(/usr/bin/id -u) -ne 0 ]]; then
     echo "Not running as root"
     exit
@@ -35,3 +37,5 @@ fi
 
 ll-reset-password "$ARG_USERNAME"
 ll-reset-verification-code "$ARG_USERNAME"
+
+echo "Done ll-create-user"

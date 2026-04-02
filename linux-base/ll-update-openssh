@@ -1,8 +1,9 @@
 #! /bin/bash
+echo "Executing ll-update-openssh"
 
 if [[ $(/usr/bin/id -u) -ne 0 ]]; then
     echo "Not running as root"
-    exit
+    exit 1
 fi
 
 source "ll-argparse"
@@ -12,10 +13,11 @@ parse_args
 
 if [[ $ARG_OPENSSH = '' ]]; then
   print_help
-  exit
+  exit 1
 fi
 
-sudo yum install gcc openssl-devel zlib-devel mlocate autoconf pam-devel -y
+sudo dnf update -y
+sudo dnf install gcc openssl-devel zlib-devel plocate autoconf pam-devel -y
 
 mkdir temp
 cd temp
@@ -28,3 +30,5 @@ cd ..
 rm -rf temp
 
 sudo chmod 400 /etc/ssh/ssh_host_ecdsa_key /etc/ssh/ssh_host_rsa_key /etc/ssh/ssh_host_ed25519_key
+
+echo "Done ll-update-openssh."
